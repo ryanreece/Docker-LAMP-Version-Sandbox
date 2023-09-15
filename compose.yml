@@ -1,0 +1,93 @@
+version: '3'
+
+services:
+  web_latest:
+    build:
+      context: apache-php-latest
+    image: apache-php-latest
+    volumes:
+      - ./apache-php-latest/src:/var/www/html
+    networks:
+      - vpc_01
+    depends_on:
+      - db
+  
+  db:
+    build:
+      context: mysql-latest
+    image: mysql-latest
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql-root-sdlc
+    networks:
+      - vpc_01
+  
+  db_phpmyadmin:
+    image: phpmyadmin
+    environment:
+      - PMA_HOST=db
+    networks:
+      - vpc_01
+    depends_on:
+      - db
+  
+  web_legacy:
+    build:
+      context: apache-php-7.4.33
+    image: apache-php-7.4.33
+    volumes:
+      - ./apache-php-7.4.33/src:/var/www/html
+    networks:
+      - vpc_01
+    depends_on:
+      - db_legacy
+  
+  db_legacy:
+    build:
+      context: mysql-5.7
+    image: mysql-5.7
+    volumes:
+      - db_legacy_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql-root-sdlc
+    networks:
+      - vpc_01
+  
+  db_legacy_phpmyadmin:
+    image: phpmyadmin
+    environment:
+      - PMA_HOST=db_legacy
+    networks:
+      - vpc_01
+    depends_on:
+      - db_legacy
+  
+  app_lb1:
+    build:
+      context: nginx-latest
+    image: nginx-latest
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+      - "8090:8090"
+      - "8091:8091"
+      - "3380:3380"
+      - "3381:3381"
+    networks: 
+      - vpc_01
+    depends_on: 
+      - web_latest
+      - db
+      - db_phpmyadmin
+      - web_legacy
+      - db_legacy
+      - db_legacy_phpmyadmin
+
+volumes:
+  db_data:
+  db_legacy_data:
+
+networks:
+  vpc_01:
+    driver: bridge
