@@ -101,6 +101,26 @@ volumes:
 Volumes can be listed using the docker cli and are preserved between container creations and destroys.
 ```bash
 $ docker volume ls
-local     sdlc-db_data
-local     sdlc-db_legacy_data
+local     docker-lamp-version-sandbox_db_data
+local     docker-lamp-version-sandbox_db_legacy_data
+```
+
+### Docker Images
+
+View images:
+```bash
+$ docker image ls
+REPOSITORY          TAG       IMAGE ID       CREATED       SIZE
+nginx-latest        latest    a2bc4287970f   3 hours ago   187MB
+apache-php-7.4.33   latest    4c2c4df02190   2 days ago    479MB
+apache-php-latest   latest    a93bcf0730b4   3 days ago    531MB
+phpmyadmin          latest    b5821d22d3db   8 days ago    562MB
+mysql               latest    99afc808f15b   5 weeks ago   577MB
+mysql-latest        latest    e645c1e8d39e   5 weeks ago   577MB
+mysql-5.7           latest    3e51c56d1e0b   6 weeks ago   581MB
+```
+
+Delete specific image:
+```bash
+$ docker image rm IMAGE_NAME
 ```
