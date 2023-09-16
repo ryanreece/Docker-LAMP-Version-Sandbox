@@ -1,6 +1,6 @@
-# SDLC-Sandbox
+# Docker LAMP Versions Sandbox
 
-Platform for testing multiple versions of web server infrastructure using Docker Compose.
+A Docker Compose framework designed to make it simple to test different versions of Apache, PHP, and MySQL. Whether you are looking to perform major version upgrades or simply need to test your app against various software stacks, this repo might be able to help. With easy-to-use configuration files, you can simultaneously switch between multiple software versions to ensure your application runs smoothly under any setup.
 
 ## Default Containers
 1. Nginx Load Balancer - Latest Version

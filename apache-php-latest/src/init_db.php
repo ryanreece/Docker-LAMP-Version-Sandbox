@@ -9,18 +9,24 @@ $newUser = 'test_database_user';
 $newUserPassword = 'test_database_password';
 
 try {
-    // Connect to MySQL server with root
-    $rootPdo = new PDO("mysql:host=$host", 'root', $rootPassword);
+  // Connect to MySQL server with root
+  $rootPdo = new PDO("mysql:host=$host", 'root', $rootPassword);
 
-    // Create a new database
-    $rootPdo->exec("CREATE DATABASE `$newDatabase`;") or die(print_r($rootPdo->errorInfo(), true));
+  // Create a new database
+  $rootPdo->exec("CREATE DATABASE `$newDatabase`;");
 
-    // Create a new user and grant all privileges on the new database
-    $rootPdo->exec("CREATE USER '$newUser'@'%' IDENTIFIED BY '$newUserPassword';") or die(print_r($rootPdo->errorInfo(), true));
-    $rootPdo->exec("GRANT ALL ON `$newDatabase`.* TO '$newUser'@'%';") or die(print_r($rootPdo->errorInfo(), true));
+  // Create a new user and grant all privileges on the new database
+  $rootPdo->exec("CREATE USER '$newUser'@'%' IDENTIFIED BY '$newUserPassword';");
+  $rootPdo->exec("GRANT ALL ON `$newDatabase`.* TO '$newUser'@'%';");
 
-    echo 'Successfully created new database and user.';
+  echo "<pre>";
+  echo "Message log\n";
+  echo "Successfully created new database and user.\n";
+  echo "Database: $newDatabase\n";
+  echo "User Details:\n";
+  echo "Username: $newUser\n";
+  echo "Password: $newUserPassword\n";
+  echo "</pre>";
 } catch (PDOException $e) {
-    echo 'Error: ' . $e->getMessage();
+  echo 'Error: ' . $e->getMessage();
 }
-?>
