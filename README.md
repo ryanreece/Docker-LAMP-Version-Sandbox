@@ -81,11 +81,15 @@ $ apache-php-7.4.33/src/
 Using the `db_legacy` container running MySQL 5.7:
 ```php
 <?php
-// MySQL server settings
-$host = 'db_legacy'; // Docker Compose service name for MySQL
-$rootPassword = 'mysql-root-sdlc'; // Same as MYSQL_ROOT_PASSWORD in docker-compose.yml
+// MySQL Server Host
+// 'db_legacy' is the Docker Compose service name for MySQL
+$host = 'db_legacy';
 
-// Connect to MySQL server with root
+// MySQL Root Password
+// Same as MYSQL_ROOT_PASSWORD in docker-compose.yml
+$rootPassword = 'mysql-root-sdlc';
+
+// Connect to MySQL server with root credentials
 $rootPdo = new PDO("mysql:host=$host", 'root', $rootPassword);
 ```
 
