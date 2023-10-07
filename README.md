@@ -2,6 +2,8 @@
 
 A Docker Compose framework designed to make it simple to test different versions of Apache, PHP, and MySQL. Whether you are looking to perform major version upgrades or simply need to test your app against various software stacks, this repo might be able to help. With easy-to-use configuration files, you can simultaneously switch between multiple software versions to ensure your application runs smoothly under any setup.
 
+For a more detailed review of the functionality of this repo as well as the inspiration, [check out my blog post](https://reece.ai/docs/devnetops/docker/docker-lamp-version-sandbox).
+
 ## Default Containers
 1. Nginx Load Balancer - Latest Version
 2. Apache PHP - Latest Version
